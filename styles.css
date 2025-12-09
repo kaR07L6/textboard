@@ -255,3 +255,25 @@ body {
     background-color: #fef3c7;
     border-top: 1px solid #e5e7eb;
 }
+
+/* Anchor Link */
+.anchor-link {
+    color: #dc2626;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.anchor-link:hover {
+    color: #991b1b;
+}
+
+/* Post Highlight Animation */
+.post-highlighted {
+    background-color: #fef3c7 !important;
+    transition: background-color 0.3s ease;
+}
+
+.post-item {
+    transition: background-color 0.3s ease;
+}

@@ -1,4 +1,4 @@
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 
 // Icon Components
 const MessageSquare = (props) => (
@@ -36,6 +36,9 @@ function Textboard() {
     const [newThreadTitle, setNewThreadTitle] = useState('');
     const [newPost, setNewPost] = useState('');
     const [name, setName] = useState('');
+    const [highlightedPost, setHighlightedPost] = useState(null);
+    
+    const postRefs = useRef({});
 
     useEffect(() => {
         const savedThreads = localStorage.getItem('textboard_threads');
@@ -60,6 +63,7 @@ function Textboard() {
     const openThread = (thread) => {
         setCurrentThread(thread);
         setView('posts');
+        setHighlightedPost(null);
     };
 
     const createThread = () => {
@@ -157,10 +161,57 @@ function Textboard() {
         if (view === 'posts') {
             setView('threads');
             setCurrentThread(null);
+            setHighlightedPost(null);
         } else {
             setView('boards');
             setCurrentBoard(null);
         }
+    };
+
+    const scrollToPost = (postNumber) => {
+        const postElement = postRefs.current[postNumber];
+        if (postElement) {
+            postElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setHighlightedPost(postNumber);
+            setTimeout(() => setHighlightedPost(null), 2000);
+        }
+    };
+
+    const parseContent = (content) => {
+        const anchorRegex = />>(>\d+)/g;
+        const parts = [];
+        let lastIndex = 0;
+        let match;
+
+        while ((match = anchorRegex.exec(content)) !== null) {
+            // テキスト部分を追加
+            if (match.index > lastIndex) {
+                parts.push({
+                    type: 'text',
+                    content: content.substring(lastIndex, match.index)
+                });
+            }
+
+            // アンカー部分を追加
+            const postNumber = parseInt(match[1]);
+            parts.push({
+                type: 'anchor',
+                number: postNumber,
+                content: `>>${postNumber}`
+            });
+
+            lastIndex = match.index + match[0].length;
+        }
+
+        // 残りのテキストを追加
+        if (lastIndex < content.length) {
+            parts.push({
+                type: 'text',
+                content: content.substring(lastIndex)
+            });
+        }
+
+        return parts.length > 0 ? parts : [{ type: 'text', content }];
     };
 
     return (
@@ -266,14 +317,36 @@ function Textboard() {
                         {/* Posts */}
                         <div>
                             {getThreadPosts().map((post) => (
-                                <div key={post.id} className="post-item">
+                                <div 
+                                    key={post.id} 
+                                    ref={el => postRefs.current[post.number] = el}
+                                    className={`post-item ${highlightedPost === post.number ? 'post-highlighted' : ''}`}
+                                >
                                     <div className="post-header">
                                         <span className="post-number">{post.number}</span>
                                         <span className="post-separator">:</span>
                                         <span className="post-name">{post.name}</span>
                                         <span className="post-timestamp">{formatDate(post.timestamp)}</span>
                                     </div>
-                                    <div className="post-content">{post.content}</div>
+                                    <div className="post-content">
+                                        {parseContent(post.content).map((part, index) => {
+                                            if (part.type === 'anchor') {
+                                                return (
+                                                    <span
+                                                        key={index}
+                                                        className="anchor-link"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            scrollToPost(part.number);
+                                                        }}
+                                                    >
+                                                        {part.content}
+                                                    </span>
+                                                );
+                                            }
+                                            return <span key={index}>{part.content}</span>;
+                                        })}
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -289,7 +362,7 @@ function Textboard() {
                                 className="form-input"
                             />
                             <textarea
-                                placeholder="本文"
+                                placeholder="本文 (>>数字 でアンカーを付けられます)"
                                 value={newPost}
                                 onChange={(e) => setNewPost(e.target.value)}
                                 className="form-textarea"
