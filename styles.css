@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.app-container {
+    min-height: 100vh;
+    background-color: #f3f4f6;
+}
+
+/* Header */
+.header {
+    background-color: #ea580c;
+    color: white;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    max-width: 56rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.header-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.icon {
+    width: 28px;
+    height: 28px;
+}
+
+.icon-small {
+    width: 18px;
+    height: 18px;
+}
+
+.icon-medium {
+    width: 16px;
+    height: 16px;
+}
+
+/* Buttons */
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-back {
+    background-color: #c2410c;
+    color: white;
+}
+
+.btn-back:hover {
+    background-color: #9a3412;
+}
+
+.btn-submit {
+    background-color: #16a34a;
+    color: white;
+}
+
+.btn-submit:hover {
+    background-color: #15803d;
+}
+
+/* Main Content */
+.main-content {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Card */
+.card {
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.card-header {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem;
+    background-color: #f9fafb;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+}
+
+/* Board List */
+.board-item {
+    padding: 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.board-item:last-child {
+    border-bottom: none;
+}
+
+.board-item:hover {
+    background-color: #f9fafb;
+}
+
+.board-name {
+    font-weight: bold;
+    font-size: 1.125rem;
+    color: #2563eb;
+}
+
+.board-name:hover {
+    text-decoration: underline;
+}
+
+/* Form */
+.form-container {
+    padding: 1rem;
+    background-color: #fef3c7;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.form-title {
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+    height: 6rem;
+    resize: vertical;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+/* Thread List */
+.thread-item {
+    padding: 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.thread-item:last-child {
+    border-bottom: none;
+}
+
+.thread-item:hover {
+    background-color: #f9fafb;
+}
+
+.thread-title {
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.thread-title:hover {
+    text-decoration: underline;
+}
+
+.thread-meta {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+}
+
+/* Empty State */
+.empty-state {
+    padding: 2rem;
+    text-align: center;
+    color: #6b7280;
+}
+
+/* Post */
+.post-item {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.post-item:last-child {
+    border-bottom: none;
+}
+
+.post-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.post-number,
+.post-separator,
+.post-name {
+    font-weight: bold;
+    color: #15803d;
+}
+
+.post-timestamp {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.post-content {
+    margin-left: 2rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Reply Form */
+.reply-form {
+    padding: 1rem;
+    background-color: #fef3c7;
+    border-top: 1px solid #e5e7eb;
+}
