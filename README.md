@@ -1,52 +1,63 @@
 # Textboard
 
-匿名テキスト掲示板システム
+シンプルな匿名テキスト掲示板システム
 
 ## 特徴
 
-- シンプルな匿名掲示板
-- 複数の板に対応
-- スレッド・レス機能
-- データ永続化
+- 複数の板(カテゴリ)に対応
+- スレッド作成機能
+- レス投稿機能
+- 名前欄は省略可能(デフォルト: 名無しさん)
+- タイムスタンプ付き投稿
+- ブラウザのlocalStorageでデータを保存
 
 ## 使い方
 
 1. `index.html`をブラウザで開く
-2. 板を選択
-3. スレッドを作成または既存スレッドに書き込み
+2. 板一覧から板を選択
+3. スレッドを作成するか、既存のスレッドを開く
+4. レスを投稿
+
+## デモ
+
+ローカルで動作するシングルページアプリケーションです。
 
 ## 技術スタック
 
-- React
-- Tailwind CSS
-- localStorage (データ保存)
+- React 18
+- Vanilla JavaScript
+- localStorage (データ永続化)
+- インラインCSS
 
 ## ライセンス
 
 MIT License
+
+## 注意事項
+
+このプロジェクトは教育目的で作成されたものです。商用利用する場合は適切なバックエンドシステムとセキュリティ対策を実装してください。
 ```
 
-**`.gitignore`**
+## 3. .gitignore
 ```
-# Dependencies
-node_modules/
-
-# Build files
-dist/
-build/
-
 # Editor files
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
 # OS files
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
 ```
 
-**`LICENSE`**
+## 4. LICENSE
 ```
 MIT License
 
